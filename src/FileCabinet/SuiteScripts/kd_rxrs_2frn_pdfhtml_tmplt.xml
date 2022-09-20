@@ -1,0 +1,228 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width: 100%;">
+                <tr>
+                    <td width="37%" line-height="60pt">&nbsp;</td>
+                    <td width="36%">&nbsp;</td>
+                    <td width="8%">&nbsp;</td>
+                    <td width="19%">&nbsp;</td>
+                </tr>
+				<tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                    <td align="left">
+                    <#assign deaNoLength = record.custrecord_kd_2frn_customer_dea_lic_num?string?length>
+                    <#list 0..deaNoLength-1 as i>
+                        ${record.custrecord_kd_2frn_customer_dea_lic_num?string[i]}
+                        <#if i lt deaNoLength-1>
+                            &nbsp;&nbsp;
+                        </#if>
+                    </#list>
+                    </td>
+                </tr>
+                <tr>
+                    <td line-height="28pt">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                    <td colspan="2" line-height="20pt">${record.custrecord_kd_2frn_customer}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>d
+                    <td colspan="2" line-height="20pt">${record.custrecord_kd_f2rn_billaddress?split("<br />")[1]}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                    <td colspan="2" line-height="20pt">${record.custrecord_kd_f2rn_billaddress?split("<br />")[2]}</td>
+                </tr>
+                <tr>
+                    <td line-height="40pt">${user.firstname} ${user.lastname}</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>${.now?date}</td>
+                </tr>
+            </table>
+        </macro>
+        <macro id="nlheader2">
+            <table class="header" style="width: 100%;">
+                <tr>
+                    <td rowspan="3"><#if companyInformation.logoUrl?length != 0><img src="${companyInformation.logoUrl}" style="float: left; margin: 7px" /> </#if> <span class="nameandaddress">${companyInformation.companyName}</span><br /><span class="nameandaddress">${companyInformation.addressText}</span></td>
+                    <td align="right"><span class="title">${record@title}</span></td>
+                </tr>
+                <tr>
+                    <td align="right"><span class="number">#${record.tranid}</span></td>
+                </tr>
+                <tr>
+                    <td align="right">${record.trandate}</td>
+                </tr>
+            </table>
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;">
+                <tr>
+                    <td><barcode codetype="code128" showtext="true" value="${record.id}"/></td>
+                    <td align="right"><pagenumber/> of <totalpages/></td>
+                </tr>
+            </table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 8pt;
+			table-layout: fixed;
+		}
+		th {
+			font-weight: bold;
+			font-size: 8pt;
+			vertical-align: middle;
+			padding: 5px 6px 3px;
+			background-color: #e3e3e3;
+			color: #333333;
+		}
+		td {
+			padding: 3px 6px;
+		}
+		td p { align:left }
+		b {
+			font-weight: bold;
+			color: #333333;
+		}
+		table.header td {
+			padding: 0px;
+			font-size: 10pt;
+		}
+		table.footer td {
+			padding: 0px;
+			font-size: 8pt;
+		}
+		table.itemtable th {
+			padding-bottom: 10px;
+			padding-top: 10px;
+		}
+		table.body td {
+			padding-top: 2px;
+		}
+		table.total {
+			page-break-inside: avoid;
+		}
+		tr.totalrow {
+			background-color: #e3e3e3;
+			line-height: 200%;
+		}
+		td.totalboxtop {
+			font-size: 12pt;
+			background-color: #e3e3e3;
+		}
+		td.addressheader {
+			font-size: 8pt;
+			padding-top: 6px;
+			padding-bottom: 2px;
+		}
+		td.address {
+			padding-top: 0px;
+		}
+		td.totalboxmid {
+			font-size: 28pt;
+			padding-top: 20px;
+			background-color: #e3e3e3;
+		}
+		td.totalboxbot {
+			background-color: #e3e3e3;
+			font-weight: bold;
+		}
+        td.item {
+            height: 10pt
+        }
+		span.title {
+			font-size: 28pt;
+		}
+		span.number {
+			font-size: 16pt;
+		}
+		span.itemname {
+			font-weight: bold;
+			line-height: 150%;
+		}
+		hr {
+			width: 100%;
+			color: #d3d3d3;
+			background-color: #d3d3d3;
+			height: 1px;
+		}
+</style>
+</head>
+<body header="nlheader" header-height="43.5%" footer="" footer-height="20pt" padding="0.25in 0.25in 0.12in 0.25in" size="Letter-Landscape">
+    <#if record.custpage_sublist_items_requested?has_content>
+    <table width="100%">
+        <#assign form222Count = record.custbody_kd_no_form_222>
+        <#list record.custpage_sublist_items_requested as itemrequested>
+            <tr>
+                <td line-height="10pt" width="2%">&nbsp;</td>
+                <td width="7%">
+                    <#if itemrequested.custpage_col_item_ful_par == "Full Package">
+                        ${itemrequested.custpage_col_item_qty}
+                    <#else>
+                        1
+                    </#if>
+                </td>
+                <td width="6%">
+                    <#if itemrequested.custpage_col_item_ful_par == "Full Package">
+                        x / x
+                    <#else>
+                        ${itemrequested.custpage_col_item_qty} / x
+                    </#if>
+                </td>
+                <!--td width="45%">${itemrequested.custpage_col_item}</td-->
+                <td width="46%">${itemrequested.custpage_col_item_description}</td>
+                <td padding-left="2pt">
+                &nbsp;
+                <#assign ndcLength = itemrequested.custpage_col_item_ndc?string?length>
+                <#list 0..ndcLength-1 as i>
+                    ${itemrequested.custpage_col_item_ndc?string[i]}
+                    <#if i lt ndcLength-1>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </#if>
+                </#list>
+                </td>
+            </tr>
+        </#list>
+        <#if record.custpage_sublist_items_requested?size lt 20>
+            <#list record.custpage_sublist_items_requested?size..19 as i>
+                <tr><td line-height="10pt">&nbsp;</td></tr>
+            </#list>
+        </#if>
+        <tr><td>${record.custpage_sublist_items_requested?size}</td></tr>
+    </table>
+    </#if>
+</body>
+</pdf>

@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Untitled Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <style type="text/css">
+        body{font-family: "Barlow Semi Condensed", sans-serif; background-color:#f1efe9;}
+        .bold{font-weight:800;}
+        .semibold{font-weight:600;}
+        .field-cont{ padding: 5px 0; }
+        .field-cont input, .field-cont select, .field-cont options{
+            padding: 10px;
+            display: block;
+            color: #3A3A3A;
+            font-size: 13px;
+            border: 1px solid #3A3A3A;
+            width: 100%;
+            margin-bottom: 10px;
+            height:40px;
+        }
+        .field-cont textarea{
+            padding: 10px;
+            display: block;
+            color: #3A3A3A;
+            font-size: 13px;
+            border: 1px solid #3A3A3A;
+            width: 100%;
+            margin-bottom: 10px;
+            height:70px;
+        }
+        .submit-btn{
+            background-color: #5a5a5a;
+            color: #fff !important;
+            font-weight: 400;
+            border: 1px solid #5a5a5a !important;
+            border-radius: 6px;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 10px;
+        }
+        .orange13{color:#e55302;}
+        .gray{color:#666;}
+        .heading{font-weight:800; font-size:16px;}
+        .field-cont{color:#54585a;}
+        .ra-items-table td{padding-left:5px;}
+        .titlep{
+            padding: 25px 0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div clas="row title-cont">
+        <p align="left" class="grey-content semibold title">
+            Request a Return
+        </p>
+    </div>
+    <nlform>
+
+        <div class="field-cont row">
+            <div class="col-sm-3">
+                <span class="field-label">Transaction Date: *</span>
+            </div>
+            <div class="col-sm-5">
+                <nlcustrecord_kd_mrr_rx_otc_no_labels>
+
+                </nlcustrecord_kd_mrr_rx_otc_no_labels></div>
+        </div>
+        <div class="field-cont row">
+            <div class="col-sm-3">
+                <nlcustrecord_kd_rxotc>
+                    <input name="RxOTC" type="checkbox" value="checkbox" >
+                </nlcustrecord_kd_rxotc></div>
+
+            </div>
+            <div class="col-sm-5">
+
+        </div>
+        <div class="field-cont row">
+            <div class="col-sm-3">
+                <span class="field-label">Return Reason: *</span>
+            </div>
+            <div class="col-sm-5">
+                <nlcusteventkd_case_returnreason>
+                </nlcusteventkd_case_returnreason></div>
+        </div>
+        <div class="field-cont row">
+            <div class="col-sm-3">
+                <span class="field-label">Message: *</span>
+            </div>
+            <div class="col-sm-5">
+                <nlincomingmessage>
+                </nlincomingmessage></div>
+        </div>
+        <div class="hidden-fields">
+            <nlemail></nlemail>
+            <nlsubsidiary></nlsubsidiary>
+            <nlincomingmessage></nlincomingmessage>
+            <nlfirstname></nlfirstname>
+            <nllastname></nllastname>
+        </div>
+        <div class="field-cont row">
+            <div class="col-sm-3">
+                <span class="field-label"></span>
+            </div>
+            <div class="col-sm-5">
+                <input name="submit" type="submit" value="Submit" class="btn submit-btn">
+            </div>
+        </div>
+    </nlform>
+</div>
+<script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+        return false;
+    };
+    jQuery(document).ready(function(){
+        jQuery('.hidden-fields').css('display','none');
+        jQuery('#title').attr('readonly','readonly').val('Return Requested');
+    });
+</script>
+</body>
+</html>
